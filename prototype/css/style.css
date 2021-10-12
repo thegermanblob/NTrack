@@ -1,0 +1,154 @@
+body{
+    background-image: url('../images/bg.jpg');
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    background-position:center;
+    background-size: cover;
+    font-size:14px;
+}
+
+.navbar-brand > .brandname
+{
+    font-family: 'Nova Round', cursive;
+    font-size: 34px !important;
+    text-shadow: 1px 1px #333;
+    display: block;
+    margin-bottom: -6px !important;
+    padding: 0 !important;
+    letter-spacing: -3px !important;
+
+}
+
+.navbar-brand > .tagline
+{
+    font-size:12px;
+    text-shadow: 1px 1px #666;
+    margin: 0 !important;
+}
+
+#navbarSupportedContent
+{
+    margin-left: 50px !important;
+}
+
+.clearwhite
+{
+    background-color: rgba(255,255,255,0.1) !important;
+}
+
+.clearblack
+{
+    background-color: rgba(0,0,0,0.4) !important;
+}
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+
+.newticket
+{
+   color:#fff !important; 
+   border:1.3px solid #fff !important; 
+}
+
+.newticket:hover
+{
+    background-color: rgb(250, 187, 13) !important;
+    color:#000 !important;
+}
+
+.textwhite
+{
+    color:#fff !important;
+}
+
+.loggedUser
+{
+    
+    margin:auto 20px;
+    margin-bottom: 20px;
+}
+
+.loggedUser #loggedUser
+{
+    font-size:18px;
+    margin:0 !important;
+}
+
+.loggedUser #loggedEmail
+{
+    color:#999;
+    font-size:12px;
+}
+
+
+.loggedUser .dropdown-item
+{
+    font-size:12px !important;
+}
+
+.loggedUser .userInfo
+{
+    padding: 0 20px !important;
+    margin:0 !important;
+}
+
+.form-group, .row
+{
+    margin-bottom: 20px !important;
+}
+
+.control-label
+{
+    margin-bottom: 10px !important;
+    color: #fff;
+    text-shadow: 1px 1px #333;
+}
+
+fieldset
+{
+    border: 0 !important;
+    margin: 40px;
+    background:rgba(0, 0, 0, .7);
+    padding: 10px 40px 20px !important;
+    border-radius: 20px;
+}
+
+fieldset > legend
+{
+    padding:20px !important;
+	font-size:26px;
+    text-shadow: 1px 1px #333;
+
+	color:#fff;
+    letter-spacing: -1px !important;
+    text-align: center !important;
+}
+
+.myform h3
+{
+    color:#fff;
+    text-shadow: 1px 1px #333;
+    font-size: 22px !important;
+    letter-spacing: -2px !important;
+}
+
+.myform .btn
+{
+    font-weight: bold;
+    padding:20px !important;
+}
+
+
