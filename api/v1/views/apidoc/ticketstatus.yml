@@ -1,0 +1,11 @@
+Endpoint returns all tickets of the given status
+---
+parameters:
+  - name: tstatus
+    in: path
+    type: string
+    required: true
+  
+responses:
+  200:
+    description: A list of all tickets of given status
