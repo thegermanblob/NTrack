@@ -7,13 +7,13 @@ from models.User import User
 from models.Client import Client
 
 @app_views.route('/status', methods=['GET'], strict_slashes=False)
-@swag_from('./apidoc/status.yml')
+@swag_from('apidoc/status.yml')
 def status():
     """ Status of API """
     return jsonify({"status":"OK"})
 
 @app_views.route('/stats', methods=['GET'], strict_slashes=False)
-@swag_from('./apidocs/stats.yml')
+@swag_from('apidoc/stats.yml')
 def stats():
     """ Returns the number of each objects by type """
     clases = { "Tickets":Tickets, "Users":User, "Clients":Client}
