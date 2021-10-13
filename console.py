@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import cmd
+from datetime import datetime
 from pprint import pprint
 from models.User import User
 from models.Client import Client
@@ -11,6 +12,10 @@ import shlex
 classes = {"User": User, "Client": Client,
            "Tickets": Tickets, "StatusUpdates": StatusUpdates}
 
+def save(obj):
+    """ saves the obj while updating the time """
+    obj.updated_at = datetime.utcnow()
+    obj.save()
 
 class NtrackCommand(cmd.Cmd):
     """ A console to test and develop the NTrack application """
@@ -43,6 +48,11 @@ class NtrackCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return False
         instance.save()
+
+    def do_update(self, arg):
+        """ Updates given obj """
+
+
     
     def all_objs(self):
         """ prints all objs in db """
