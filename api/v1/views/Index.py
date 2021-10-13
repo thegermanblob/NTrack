@@ -1,10 +1,11 @@
 """ Index """
+from api.v1.app import app_views
 from flasgger import swag_from
 from flask import jsonify
-from api.v1.app import app_views
+from models.Client import Client
 from models.Tickets import Tickets
 from models.User import User
-from models.Client import Client
+
 
 @app_views.route('/status', methods=['GET'], strict_slashes=False)
 @swag_from('apidoc/status.yml')

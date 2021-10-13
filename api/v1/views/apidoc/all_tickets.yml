@@ -1,0 +1,6 @@
+Endpoint provides list of all tickets in the db
+---
+responses:
+  200:
+    description: A list of all tickets in the database
+   
