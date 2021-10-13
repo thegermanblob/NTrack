@@ -1,0 +1,10 @@
+Endpoint providing count of documents in their respective collections
+---
+responses:
+  200:
+    description: A list containing collection names with their respective count of documents inside
+    examples:
+      Tickets: 100
+      Clients: 80
+      Users: 20
+
