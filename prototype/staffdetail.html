@@ -63,10 +63,10 @@
   </nav>
   
 <!-- START FORM -->
-    <div class="container" style="margin-top:5%">
-        <fieldset class="myform" style="width:60%; margin:auto;">
+    <div class="container" style="margin-top:4%">
+        <fieldset class="myform" style="width:70%; margin:auto;">
             <legend><span>Staff member Information</span></legend>
-
+            <div class="divider"></div>
             <div class="alert alert-info alert-dismissible fade show" role="alert">
               Form <strong>instructions</strong> should go here.
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -83,22 +83,28 @@
         <form method="post" enctype="multipart/form-data" id="myform" action="">
 
             <div class="row">
-                      <div class="col-md-12">
+                      <div class="col-md-6">
                           <div class="form-group">       
-                            <label class="control-label">Employee name</label>
-                            <input id="txtName" type="text" name="txtName" class="form-control" placeholder="Enter name for this client"/>                  
+                            <label class="control-label">First name</label>
+                            <input id="txtFirstName" type="text" name="txtFirstName" class="form-control" placeholder="First name"/>  
                           </div>
                       </div>
-                      <div class="col-md-12">
+                      <div class="col-md-6">
                         <div class="form-group">       
-                          <label class="control-label">Email address</label>
-                          <input id="txtEmail" type="text" name="txtEmail" class="form-control" placeholder="Email a valid email address"/>              
+                          <label class="control-label">Last name</label>
+                          <input id="txtLastName" type="text" name="txtLastName" class="form-control" placeholder="Last name"/>                  
                         </div>
                     </div>
-                      <div class="col-md-12">
+                      <div class="col-md-6">
+                        <div class="form-group">       
+                          <label class="control-label">Email address</label>
+                          <input id="txtEmail" type="text" name="txtEmail" class="form-control" placeholder="me@somewhere.com"/>              
+                        </div>
+                    </div>
+                      <div class="col-md-6">
                         <div class="form-group">
                           <label class="control-label">Phone number</label>
-                          <input id="txtPhone" type="text" name="txtPhone" class="form-control" placeholder="Enter a valid phone number"/>
+                          <input id="txtPhone" type="text" name="txtPhone" class="form-control" placeholder="(999) 999-9999"/>
                         </div>
                       </div>
             </div>
