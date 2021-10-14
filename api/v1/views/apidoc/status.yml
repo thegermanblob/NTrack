@@ -1,0 +1,7 @@
+Endpoint for status of api
+---
+responses:
+  200:
+    description: A JSON dictionary containing status = OK
+    examples:
+      status: OK
