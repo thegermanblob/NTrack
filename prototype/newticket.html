@@ -64,10 +64,21 @@
       </nav>
   
 <!-- NEW TICKET FORM -->
-    <div class="container" style="margin-top:5%">
+    <div class="container" style="margin-top:3%">
         <fieldset class="myform" style="width:60%; margin:auto;">
             <legend><span>Create new ticket</span></legend>
-        
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+              Form <strong>instructions</strong> should go here.
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              This is an <strong>error</strong> message
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              This is a <strong>success</strong> message
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         <form method="post" enctype="multipart/form-data" id="myform" action="">
 
             <div class="row">
@@ -101,7 +112,7 @@
                           </div>
                       </div>                  
           </div>
-    
+          <div class="divider"></div>
             <div class="row">
                 <div class="form-group" style="text-align: center;">
                     <button type="submit" name="btnInsert" id="btnInsert" class="btn btn-outline-success newticket clearwhite" value="OK">
@@ -114,9 +125,5 @@
     </div>
 
     </body>
-    <footer class="footer">
-      <div class="container">
-        <p>&copy; 2021.  A C14 Portfolio project by Jose Vazquez and Andres Morales.</p>
-      </div>
-    </footer>
+
     </html>

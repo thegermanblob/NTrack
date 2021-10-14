@@ -68,7 +68,15 @@
             <legend><span>Staff member Information</span></legend>
 
             <div class="alert alert-info alert-dismissible fade show" role="alert">
-              Form instructions should go here.
+              Form <strong>instructions</strong> should go here.
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              This is an <strong>error</strong> message
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              This is a <strong>success</strong> message
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
 
@@ -95,7 +103,7 @@
                       </div>
             </div>
             <!-- EMPLOYEE ONLY -->
-            <h4 style="color:red;">Note: Passwords area will be visible for the signed in user only</h4>
+            <div class="divider"></div>
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
@@ -110,17 +118,19 @@
                 </div>
               </div>
             </div>
-          <!-- -->
+            <!-- -->
+            <div class="divider"></div>
             <div class="row">
                 <div class="form-group" style="text-align: center;">
-                    <button type="submit" name="btnInsert" id="btnInsert" class="btn btn-outline-success newticket clearwhite" value="OK">
+                    <button type="submit" name="btnUpdateStaff" id="btnUpdateStaff" class="btn btn-outline-success newticket clearwhite" value="OK">
                         <i class="fas fa-user-check"></i> Update details</button>            
-                  <!-- ADMIN ONLY
+                  <!-- ADMIN ONLY -->
+                  <span style="margin:0 10px"></span>
                   <button type="submit" name="btnActivate" id="btnActivate" class="btn btn-outline-success newticket clearwhite" value="OK">
                       <i class="fas fa-toggle-off"></i> Deactivate Acess
                       <i class="fas fa-toggle-on"></i> Re-activate Access
                   </button>
-                  --->      
+                  <!----->      
                 </div>
             </div>
       
