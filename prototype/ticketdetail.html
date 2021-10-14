@@ -83,29 +83,26 @@
 
         <form method="post" enctype="multipart/form-data" id="myform" action="">                            
           
-            <h3 class="clearwhite">General Details</h3>
-            
             <div class="row">
-                <div class="col-md-6" style="padding:0 30px;">
+                <div class="col-md-6">
+                  <h3 class="clearwhite"><i class="fas fa-info-circle"></i> General Details</h3>
                   <div class="form-group">
                     <p class="control-label clearblack"><strong>Ticket number:</strong> 1246546546</p>
                     <p class="control-label clearblack"><strong>Created by:</strong> Andres Morales on 	12/31/69 6:00 PM</p>
                     <p class="control-label clearblack"><strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac mauris pretium, ultricies eros et, tempor urna</p>
-                  </div>            
-                </div>
-                <div class="col-md-6" style="padding:0 30px;">
-                    <div class="form-group">
-                        <p class="control-label clearblack"><strong>Client name:</strong> Jose Vazquez Cruz</p>
-                        <p class="control-label clearblack"><strong>Phone:</strong> 787-897-3227</strong></p>                      
-                        <p class="control-label clearblack"><strong>Type of service:</strong> Diagnostic checkup</strong></p>    
-                    </div>
-                </div>
-              </div>
-              
-              <div class="row">      
-                <div class="col-md-6" style="padding:0 30px;">
-                  <h3 class="clearwhite">Status update history </h3>
-                  <table class="mytable table table-responsive">
+                    <p class="control-label clearblack"><strong>Type of service:</strong> Diagnostic checkup</strong></p>
+                  </div>
+                  
+                  <div class="form-group">   
+                    <p class="control-label clearblack"><strong>Client name:</strong> Jose Vazquez Cruz</p>
+                    <p class="control-label clearblack"><strong>Client phone:</strong> 787-897-3227</strong></p>
+                    <p class="control-label clearblack"><strong>Client email:</strong> me@somewhere.com</strong></p>                                         
+                  </div>
+                  <p>&nbsp;</p>
+
+                <div class="form-group">
+                  <h3 class="clearwhite"><i class="fas fa-history"></i> Status update history </h3>
+                  <table class="mytable table table-responsive clearblack">
                     <tr>
                         <th>Status</th>
                         <th>Employee name</th>
@@ -127,30 +124,40 @@
                     <td>12/31/69 6:00 PM</td> 
                   </tr>                       
                   </table>
-                  <div class="row text-end"><a href='#' class='openPopup'  data-bs-toggle="modal" data-bs-target="#modalSetStatus"><i class="fas fa-plus-circle"></i>Set new status</a></div>
+                  <div class="row text-end"><a href='#' class='openPopup'  data-bs-toggle="modal" data-bs-target="#modalSetStatus"><i class="fas fa-plus-circle"></i>Set new status</a></div>          
+                </div>
+              </div>
+                <div class="col-md-6" style='padding-left:40px'>
+                  <h3 class="clearwhite"><i class="far fa-comments"></i> Comments Log (3)</h3>
+                
+                 
+                  <div class="form-group ">
+                    <label class="control-label "><u>Comment added by <strong>EMPLOYEE NAME</strong> on 12/31/69 6:00 PM</u></label>
+                    <label class="control-label"><li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac mauris pretium, ultricies eros et, tempor urna. Sed vehicula neque quis turpis tempor, sit amet gravida ligula convallis. Int</li></label>                      
+                  </div>
+                
+                  <div class="form-group">
+                    <label class="control-label"><u>Comment added by <strong>EMPLOYEE NAME</strong> on 12/31/69 6:00 PM</u></label>
+                    <label class="control-label"><li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac mauris pretium, ultricies eros et, tempor sit amet gravida ligula convallis. Int</li></label>
+                  </div>
+               
+                  <div class="form-group">
+                    <label class="control-label"><u>Comment added by <strong>EMPLOYEE NAME</strong> on 12/31/69 6:00 PM</u></label>
+                    <label class="control-label"><li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac mauris pretium, ultricies eros et, tempor urna.</li></label>
+                  </div>
+               
+                <div class="row text-end"><a href='#' type='button' class='openPopup' data-bs-toggle="modal" data-bs-target="#modalAddComment"><i class="fas fa-comment-medical"></i>Add new comment</a></div>
+                </div>
+              </div>
+              
+              <div class="row">      
+                <div class="col-md-6" style="padding:0 30px;">
+                  
               </div> <!--ends first column-->
 
               <div class="col-md-6" style="padding:0 30px;">
 
-                <h3 class="clearwhite">Comments Log (3)</h3>
                 
-                 
-                    <div class="form-group">
-                      <label class="control-label"><u>Comment added by <strong>EMPLOYEE NAME</strong> on 12/31/69 6:00 PM</u></label>
-                      <label class="control-label"><li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac mauris pretium, ultricies eros et, tempor urna. Sed vehicula neque quis turpis tempor, sit amet gravida ligula convallis. Int</li></label>                      
-                    </div>
-                  
-                    <div class="form-group">
-                      <label class="control-label"><u>Comment added by <strong>EMPLOYEE NAME</strong> on 12/31/69 6:00 PM</u></label>
-                      <label class="control-label"><li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac mauris pretium, ultricies eros et, tempor sit amet gravida ligula convallis. Int</li></label>
-                    </div>
-                 
-                    <div class="form-group">
-                      <label class="control-label"><u>Comment added by <strong>EMPLOYEE NAME</strong> on 12/31/69 6:00 PM</u></label>
-                      <label class="control-label"><li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac mauris pretium, ultricies eros et, tempor urna.</li></label>
-                    </div>
-                 
-                  <div class="row text-end"><a href='#' type='button' class='openPopup' data-bs-toggle="modal" data-bs-target="#modalAddComment"><i class="fas fa-comment-medical"></i>Add new comment</a></div>
               </div> <!-- second column ends here -->
           </div>
           

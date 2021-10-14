@@ -152,6 +152,11 @@ fieldset > legend
     padding:20px;
 }
 
+.myform h3 i
+{
+    margin-right: 10px;
+}
+
 a.openPopup
 {
     margin-bottom:40px !important;
