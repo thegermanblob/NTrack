@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date, datetime
 import mongoengine
 from mongoengine.fields import DateTimeField
 from models.Client import Client
@@ -19,3 +19,8 @@ class Tickets(mon.Document):
     meta = {
         'collection':"Tickets"
     }
+
+    def updated_save(self):
+        """ Saves obj and updates updated_at attribute"""
+        self.updated_at = datetime.utcnow()
+        self.save()
