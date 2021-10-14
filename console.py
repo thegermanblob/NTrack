@@ -2,6 +2,8 @@
 import cmd
 from datetime import datetime
 from pprint import pprint
+
+from mongoengine.errors import DoesNotExist, FieldDoesNotExist
 from models.User import User
 from models.Client import Client
 from models.Tickets import Tickets
@@ -43,7 +45,11 @@ class NtrackCommand(cmd.Cmd):
             print("** class name missing **")
             return False
         if args[0] in classes:
-            instance = classes[args[0]].from_json(args[1])
+            try:
+                instance = classes[args[0]].from_json(args[1])
+            except FieldDoesNotExist:
+                print("Mr. T doesn't know one of those fields, fool")
+                return False
         else:
             print("** class doesn't exist **")
             return False
@@ -72,8 +78,11 @@ class NtrackCommand(cmd.Cmd):
             print("Missing ID, fool")
             return False
         if args[0] in classes:
-            instance = classes[args[0]].objects.get(id=args[1])
-            pprint(instance.to_json())
+            try:
+                instance = classes[args[0]].objects.get(id=args[1])
+                pprint(instance.to_json())
+            except DoesNotExist:
+                print("I pity the fool who don't know his ticket id")
         else:
             print("Mr. T pity the fool who doesn't know the classes")
             return False
