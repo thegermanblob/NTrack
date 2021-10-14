@@ -47,7 +47,7 @@ class NtrackCommand(cmd.Cmd):
         if args[0] in classes:
             try:
                 instance = classes[args[0]].from_json(args[1])
-            except FieldDoesNotExist:
+            except FieldDoesNotExist:           #protects from wrong fields in the json
                 print("Mr. T doesn't know one of those fields, fool")
                 return False
         else:
