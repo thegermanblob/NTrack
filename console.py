@@ -51,7 +51,32 @@ class NtrackCommand(cmd.Cmd):
 
     def do_update(self, arg):
         """ Updates given obj """
+        args = arg.split(' ', 1)
+        if len(args) == 0:
+            print("** class name missing **")
+            return False
+        if args[0] in classes:
+            instance = classes[args[0]].from_json(args[1])
+        else:
+            print("** class doesn't exist **")
+            return False
+        instance.save()
 
+    def do_show(self, arg):
+        """ looks for the specified obj by given id """
+        args = arg.split(' ', 1)
+        if len(args) == 0:
+            print("Missing class name fool")
+            return False
+        if len(args) == 1:
+            print("Missing ID, fool")
+            return False
+        if args[0] in classes:
+            instance = classes[args[0]].objects.get(id=args[1])
+            pprint(instance.to_json())
+        else:
+            print("Mr. T pity the fool who doesn't know the classes")
+            return False
 
     
     def all_objs(self):
