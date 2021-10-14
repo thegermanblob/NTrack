@@ -3,7 +3,7 @@ import cmd
 from datetime import datetime
 from pprint import pprint
 
-from mongoengine.errors import DoesNotExist, FieldDoesNotExist
+from mongoengine.errors import DoesNotExist, FieldDoesNotExist, ValidationError
 from models.User import User
 from models.Client import Client
 from models.Tickets import Tickets
@@ -53,7 +53,10 @@ class NtrackCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
             return False
-        instance.save()
+        try:
+            instance.save()
+        except ValidationError:
+            print("Required field is missing")
 
     def do_update(self, arg):
         """ Updates given obj """
