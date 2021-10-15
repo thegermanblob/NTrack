@@ -6,6 +6,7 @@ from flask import json, jsonify, request, abort
 from models.Client import Client
 from models.Tickets import Tickets
 from models.User import User
+from models.StatusUpdate import StatusUpdates
 
 @app_views.route('/tickets', methods=['GET'], strict_slashes=False)
 @swag_from('apidoc/all_tickets.yml')
@@ -20,7 +21,7 @@ def ticket_status(tstatus):
     """ Returns tickets that match status """
     return Tickets.objects(status=tstatus).to_json()
 
-@app_views.route('/tickets', methods=['POST'], strict_slashe=False)
+@app_views.route('/tickets', methods=['POST'], strict_slashes=False)
 @swag_from('apidoc/post_ticket.yml')
 def post_ticket():
     """ Takes a ticket json and adds it to the Database """
@@ -34,6 +35,57 @@ def post_ticket():
     new.save()
     return (new.to_json)
 
+@app_views.route('/ticket/<ticket_id>', methods=['GET'], strict_slashes=False)
+@swag_from('apidoc/get_ticket.yml')
+def get_ticket(ticket_id):
+    """ gets ticket if it is in the database """
+    try:
+        instance = Tickets.objects.get(id=ticket_id)
+        return instance.to_json()
+    except DoesNotExist:
+        abort(404, description="Ticket_id does not exist")
+    except ValidationError:
+        abort(400, description="Invalid Id")
+
+
+
+def quickpop(a_dict):
+    """ Pops uneeded keys"""
+    a_dict.pop('created_at', None)
+    a_dict.pop('updated_at', None)
+    a_dict.pop('status_updates', None)
+    return a_dict
+
+
+
+def st_updates(original, up_dict):
+    """ creates the status update doc to be embbeded """
+    og_dict = json.loads(original.to_json())
+    quickpop(og_dict)
+    quickpop(up_dict)
+    og_keys = og_dict.keys()
+    up_keys = up_dict.keys()
+        
+    
+    if len(og_dict) < len(up_keys):
+        key_diff1 = up_keys - og_keys
+    elif len(og_dict) > len(up_keys):
+        key_diff = og_keys - up_keys
+    
+    if key_diff:
+        descrip = "Removed following info: {}".format(key_diff)
+    elif key_diff1:
+        descrip = "Added following info: {}".format(key_diff1)
+
+    up_dict.pop('_id', None)
+    for key, val in up_dict.items():
+        descrip = descrip + "\n Changed {} : {}".format(key ,val)
+    stat = {}
+    stat['created_by'] = User.objects.get(id='616475474fa035538531b08b') 
+    stat['description'] = descrip
+    original.status = up_dict['status']
+    original.status_updates.append(StatusUpdates(**stat))
+    original.save()  
 
 
 @app_views.route('/tickets/<ticket_id>', methods=['PUT'], strict_slashes=False)
@@ -49,12 +101,11 @@ def put_ticket(ticket_id):
     if not updated:
         abort(400, description='Given object is not a valid JSON')
 
-    try:
-        updated = Tickets.from_json(updated)
-    except FieldDoesNotExist:
-        abort(400, description="One of given fields is incorrect")
+    print(type(updated))
     
-    try:
-        updated.updated_save()
-    except ValidationError:
-        abort(400,description="Missing required field")
+    st_updates(original, updated)
+    return Tickets.objects.get(id=ticket_id).to_json()
+    
+
+    #todo add feature that generates the status update document automaticaly
+
