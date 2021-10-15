@@ -1,4 +1,5 @@
 """ Module containing all RESTful api actions for Tickets """
+from mongoengine.errors import DoesNotExist, FieldDoesNotExist, ValidationError
 from api.v1.app import app_views
 from flasgger import swag_from
 from flask import json, jsonify, request, abort
@@ -32,3 +33,28 @@ def post_ticket():
     new = Tickets(**new)
     new.save()
     return (new.to_json)
+
+
+
+@app_views.route('/tickets/<ticket_id>', methods=['PUT'], strict_slashes=False)
+@swag_from('apidoc/put_ticket.yml')
+def put_ticket(ticket_id):
+    """ Updates a ticket """
+    try:
+        original = Tickets.objects.get(id=ticket_id)        
+    except DoesNotExist:
+        abort(404, description="Given ticket_id is not found")
+
+    updated = request.get_json()
+    if not updated:
+        abort(400, description='Given object is not a valid JSON')
+
+    try:
+        updated = Tickets.from_json(updated)
+    except FieldDoesNotExist:
+        abort(400, description="One of given fields is incorrect")
+    
+    try:
+        updated.updated_save()
+    except ValidationError:
+        abort(400,description="Missing required field")
