@@ -54,6 +54,7 @@ def quickpop(a_dict):
     a_dict.pop('created_at', None)
     a_dict.pop('updated_at', None)
     a_dict.pop('status_updates', None)
+    a_dict.pop('client_id', None)
     return a_dict
 
 
@@ -66,7 +67,7 @@ def st_updates(original, up_dict):
     og_keys = og_dict.keys()
     up_keys = up_dict.keys()
         
-    
+    # Verify what atributes we are adding or removing
     if len(og_dict) < len(up_keys):
         key_diff1 = up_keys - og_keys
     elif len(og_dict) > len(up_keys):
@@ -77,19 +78,21 @@ def st_updates(original, up_dict):
     elif key_diff1:
         descrip = "Added following info: {}".format(key_diff1)
 
+    #prepares description for status update
     up_dict.pop('_id', None)
     for key, val in up_dict.items():
         descrip = descrip + "\n Changed {} : {}".format(key ,val)
     stat = {}
-    stat['created_by'] = User.objects.get(id='616475474fa035538531b08b') 
+    stat['created_by'] = User.objects.get(id='616475474fa035538531b08b') #todo change user to session user 
     stat['description'] = descrip
     original.status = up_dict['status']
+
     original.status_updates.append(StatusUpdates(**stat))
     original.save()  
 
 
 @app_views.route('/tickets/<ticket_id>', methods=['PUT'], strict_slashes=False)
-@swag_from('apidoc/put_ticket.yml')
+@swag_from('apidoc/put_ticket.yml') # todo write documentation
 def put_ticket(ticket_id):
     """ Updates a ticket """
     try:
