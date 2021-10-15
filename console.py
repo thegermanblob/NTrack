@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 import cmd
 from datetime import datetime
+import json
 from pprint import pprint
 
 from mongoengine.errors import DoesNotExist, FieldDoesNotExist, ValidationError
+from api.v1.views.Tickets import status_update
 from models.User import User
 from models.Client import Client
 from models.Tickets import Tickets
@@ -11,6 +13,7 @@ from models.StatusUpdate import StatusUpdates
 from models import mongo_setup
 from mongoengine import *
 import shlex
+
 classes = {"User": User, "Client": Client,
            "Tickets": Tickets, "StatusUpdates": StatusUpdates}
 
@@ -47,9 +50,11 @@ class NtrackCommand(cmd.Cmd):
         if args[0] in classes:
             try:
                 instance = classes[args[0]].from_json(args[1])
+                
             except FieldDoesNotExist:           #protects from wrong fields in the json
                 print("Mr. T doesn't know one of those fields, fool")
                 return False
+            
         else:
             print("** class doesn't exist **")
             return False
@@ -58,6 +63,47 @@ class NtrackCommand(cmd.Cmd):
         except ValidationError:
             print("Required field is missing")
 
+    def quickpop(self, a_dict):
+        """ Pops uneeded keys"""
+        a_dict.pop('created_at', None)
+        a_dict.pop('updated_at', None)
+        a_dict.pop('status_updates', None)
+        return a_dict
+
+    
+
+    def status_updates(self, original, up_dict):
+        """ creates the status update doc to be embbeded """
+        og_dict = json.loads(original.to_json())
+        self.quickpop(og_dict)
+        self.quickpop(up_dict)
+        og_keys = og_dict.keys()
+        up_keys = up_dict.keys()
+         
+        
+        if len(og_dict) < len(up_keys):
+            key_diff1 = up_keys - og_keys
+        elif len(og_dict) > len(up_keys):
+            key_diff = og_keys - up_keys
+        
+        if key_diff:
+            descrip = "Removed following info: {}".format(key_diff)
+        elif key_diff1:
+            descrip = "Added following info: {}".format(key_diff1)
+
+        up_dict.pop('_id', None)
+        for key, val in up_dict.items():
+            descrip = descrip + "\n Changed {} : {}".format(key ,val)
+        stat = {}
+        stat['created_by'] = User.objects.get(id='616475474fa035538531b08b') 
+        stat['description'] = descrip
+        original.status = up_dict['status']
+        original.status_updates.append(StatusUpdates(**stat))
+        original.save()
+
+        
+        
+
     def do_update(self, arg):
         """ Updates given obj """
         args = arg.split(' ', 1)
@@ -65,11 +111,14 @@ class NtrackCommand(cmd.Cmd):
             print("** class name missing **")
             return False
         if args[0] in classes:
-            instance = classes[args[0]].from_json(args[1])
+            instance = json.loads(args[1])
+            og_id = json.loads(args[1])
+            og_id = og_id['_id']['$oid']
+            original = Tickets.objects.get(id=og_id)
         else:
             print("** class doesn't exist **")
             return False
-        instance.save()
+        self.status_updates(original, instance)
 
     def do_show(self, arg):
         """ looks for the specified obj by given id """
