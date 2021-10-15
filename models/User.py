@@ -1,6 +1,7 @@
 from datetime import datetime
 from mongoengine.document import Document
 from mongoengine.fields import DateField, DateTimeField, StringField
+from passlib.apps import custom_app_context as pwd_context
 
 class User(Document):
     """ Class that represents a user """
@@ -17,3 +18,11 @@ class User(Document):
     meta = {
         'collection':'users'
     }
+
+    def hash_password(self, password):
+        """ Hashes pasword to store """
+        self.password = pwd_context.encrypt(password)
+
+    def verify_password(self, password):
+        """ Verifies password """
+        return pwd_context.verify(password, self.password)
