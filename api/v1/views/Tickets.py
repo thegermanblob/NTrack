@@ -15,7 +15,7 @@ def all_tickets():
     return Tickets.objects.to_json()
 
 
-@app_views.route('/tickets/<tstatus>', strict_slashes=False)
+@app_views.route('/tickets/<tstatus>', methods=['GET'], strict_slashes=False)
 @swag_from('apidoc/ticketstatus.yml')
 def ticket_status(tstatus):
     """ Returns tickets that match status """
@@ -109,6 +109,3 @@ def put_ticket(ticket_id):
     st_updates(original, updated)
     return Tickets.objects.get(id=ticket_id).to_json()
     
-
-    #todo add feature that generates the status update document automaticaly
-
