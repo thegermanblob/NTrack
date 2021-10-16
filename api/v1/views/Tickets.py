@@ -2,7 +2,7 @@
 from mongoengine.errors import DoesNotExist, FieldDoesNotExist, ValidationError
 from api.v1.app import app_views
 from flasgger import swag_from
-from flask import json, jsonify, request, abort
+from flask import json, request, abort
 from models.Client import Client
 from models.Tickets import Tickets
 from models.User import User
@@ -104,7 +104,6 @@ def put_ticket(ticket_id):
     if not updated:
         abort(400, description='Given object is not a valid JSON')
 
-    print(type(updated))
     
     st_updates(original, updated)
     return Tickets.objects.get(id=ticket_id).to_json()
