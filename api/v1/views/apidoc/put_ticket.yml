@@ -1,0 +1,11 @@
+Endpoint to update a ticket
+---
+parameters:
+  - name: ticket_id
+    in: path
+    type: string
+    required: true
+
+responses:
+  200:
+    description: The updated json object
