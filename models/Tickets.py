@@ -14,8 +14,8 @@ class Tickets(mon.Document):
     description = mon.StringField(max_length=150)
     created_by =  mon.ReferenceField(User)
     status_updates = mon.EmbeddedDocumentListField(StatusUpdates)
-    created_at = DateTimeField(default=datetime.now)
-    updated_at = DateTimeField(default=datetime.now)
+    created_at = DateTimeField(default=datetime.utcnow)
+    updated_at = DateTimeField(default=datetime.utcnow)
 
     meta = {
         'collection':"Tickets"
