@@ -29,11 +29,10 @@ def post_ticket():
     if not new:
         abort(404, description="Not a JSON")
 
-    new = json.loads(new)
     new.pop('_id', None)
     new = Tickets(**new)
     new.save()
-    return (new.to_json)
+    return (new.to_json())
 
 @app_views.route('/ticket/<ticket_id>', methods=['GET'], strict_slashes=False)
 @swag_from('apidoc/get_ticket.yml')
@@ -73,8 +72,11 @@ def st_updates(original, up_dict):
     elif len(og_dict) > len(up_keys):
         key_diff = og_keys - up_keys
     
-    if key_diff:
-        descrip = "Removed following info: {}".format(key_diff)
+    if key_diff: 
+        descrip = "Removed following info: "
+        for key in key_diff:
+            if key != "_id":
+                descrip = descrip + "{}".format(key)
     elif key_diff1:
         descrip = "Added following info: {}".format(key_diff1)
 
@@ -85,7 +87,10 @@ def st_updates(original, up_dict):
     stat = {}
     stat['created_by'] = User.objects.get(id='616475474fa035538531b08b') #todo change user to session user 
     stat['description'] = descrip
-    original.status = up_dict['status']
+    try:
+        original.status = up_dict['status']
+    except KeyError:
+        pass
 
     original.status_updates.append(StatusUpdates(**stat))
     original.save()  
