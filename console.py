@@ -5,7 +5,6 @@ import json
 from pprint import pprint
 
 from mongoengine.errors import DoesNotExist, FieldDoesNotExist, ValidationError
-from api.v1.views.Tickets import status_update
 from models.User import User
 from models.Client import Client
 from models.Tickets import Tickets
