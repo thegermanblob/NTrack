@@ -2,7 +2,7 @@
 from mongoengine.errors import DoesNotExist, FieldDoesNotExist, ValidationError
 from api.v1.app import app_views
 from flasgger import swag_from
-from flask import json, request, abort
+from flask import json, request, abort, session
 from models.Client import Client
 from models.Tickets import Tickets
 from models.User import User
@@ -85,7 +85,7 @@ def st_updates(original, up_dict):
     for key, val in up_dict.items():
         descrip = descrip + "\n Changed {} : {}".format(key ,val)
     stat = {}
-    stat['created_by'] = User.objects.get(id='616475474fa035538531b08b') #todo change user to session user 
+    stat['created_by'] = User.objects.get(email=session['email'])
     stat['description'] = descrip
     try:
         original.status = up_dict['status']
