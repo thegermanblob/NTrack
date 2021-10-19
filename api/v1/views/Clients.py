@@ -1,8 +1,7 @@
 """ Module containing all RESTful api actions for Clients """
-from functools import _Descriptor
 from flask import abort, json, request
 from flasgger.utils import swag_from, validate
-from mongoengine.errors import DoesNotExist, ValidationError
+from mongoengine.errors import DoesNotExist, NotUniqueError, ValidationError
 from api.v1.views  import app_views
 from models.Client import Client
 
@@ -18,7 +17,7 @@ def all_clients():
 def get_client(client_id):
     """ Gets Client from the data base """
     try:
-        return Client.objects.get(id=client_id)
+        return Client.objects.get(id=client_id).to_json()
     except DoesNotExist:
         abort(404, description="Client_id does not exist")
     except ValidationError:
@@ -32,11 +31,13 @@ def post_client():
     if not new:
         abort(404, description="Not a JSON")
     
-    new = json.loads(new)
     new.pop('_id', None)
     new = Client(**new)
-    new.save()
-    return (new.to_json)
+    try:
+        new.save()
+    except NotUniqueError:
+        abort(400, description="Not a unique email")
+    return (new.to_json())
 
 
 @app_views.route('/clients/<client_id>', methods=['PUT'], strict_slashes=False)
@@ -53,4 +54,5 @@ def put_client(client_id):
         abort(404, description="Given object not a valid json")
 
     original.update(**updated)
+    original = Client.objects.get(id=client_id)
     return original.to_json()
