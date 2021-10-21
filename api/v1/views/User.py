@@ -1,15 +1,16 @@
 """ Model containing all RESTful api action for Users """
-from flask import abort, request
+from flask import abort, request, Blueprint
 from flasgger.utils import swag_from
 from flask import json
 from mongoengine.errors import DoesNotExist, ValidationError
-from api.v1.views import app_views
 from models.User import User
+from api.v1.views.Index import app_views
 
 @app_views.route('/users', methods=['GET'], strict_slashes=False)
 @swag_from('apidocs/all_users.yml')
 def all_users():
     """ Returns all users """
+    return User.objects.to_json()
 
 @app_views.route('/users/<user_id>', methods=['GET'], strict_slashes=False)
 @swag_from('apidocs/get_user.yml')

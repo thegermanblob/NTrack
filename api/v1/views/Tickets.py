@@ -1,12 +1,22 @@
 """ Module containing all RESTful api actions for Tickets """
+from flask.helpers import url_for
 from mongoengine.errors import DoesNotExist, FieldDoesNotExist, ValidationError
-from api.v1.app import app_views
 from flasgger import swag_from
-from flask import json, request, abort, session
+from flask import json, request, abort, session, Blueprint, redirect
 from models.Client import Client
 from models.Tickets import Tickets
 from models.User import User
 from models.StatusUpdate import StatusUpdates
+from api.v1.views.Index import app_views
+
+
+#todo add session check function 
+@app_views.route('/whoami', strict_slashes=False)
+def whoami():
+    hi = session.pop('email', None)
+    if not hi:
+        return redirect(url_for('app_views.login'))
+    return hi
 
 @app_views.route('/tickets', methods=['GET'], strict_slashes=False)
 @swag_from('apidoc/all_tickets.yml')
@@ -28,8 +38,11 @@ def post_ticket():
     new = request.get_json()
     if not new:
         abort(404, description="Not a JSON")
+    if not session.pop('email', None):
+        return redirect(url_for('app_views.login'))
 
     new.pop('_id', None)
+    new['created_by'] = User.objects.get(email=session.pop('email', None))
     new = Tickets(**new)
     new.save()
     return (new.to_json())
@@ -112,4 +125,3 @@ def put_ticket(ticket_id):
     
     st_updates(original, updated)
     return Tickets.objects.get(id=ticket_id).to_json()
-    

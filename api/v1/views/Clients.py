@@ -1,9 +1,10 @@
 """ Module containing all RESTful api actions for Clients """
-from flask import abort, json, request
+from flask import abort, json, request, Blueprint
 from flasgger.utils import swag_from, validate
 from mongoengine.errors import DoesNotExist, NotUniqueError, ValidationError
-from api.v1.views  import app_views
 from models.Client import Client
+from api.v1.views.Index import app_views
+
 
 
 @app_views.route('/clients', methods=['GET'], strict_slashes=False)

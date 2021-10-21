@@ -1,9 +1,10 @@
 from flasgger.utils import swag_from
-import flask
-from flask import request, abort, session
+from flask import Blueprint
+from flask import request, abort, session, redirect
+from flask.helpers import url_for
 from mongoengine.errors import DoesNotExist, ValidationError
-from api.v1.views import app_views
 from models.User import User
+from api.v1.views.Index import app_views
 
 @app_views.route('/login', methods=['GET', 'POST'])
 @swag_from('apidoc/login.yml')
@@ -20,5 +21,10 @@ def login():
         except DoesNotExist:
             abort(400, description="Email does not exist")
 
-    if info['password'] == user.password:
-        session['email'] = user.email
+        if info['password'] == user.password:
+            session['email'] = user.email
+            return "Login success"
+        else:
+            return "Incorrect password"
+    else:
+        return "login page"
