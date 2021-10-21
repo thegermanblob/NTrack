@@ -1,4 +1,6 @@
 Flask
+flasgger
+pymongo[srv]
 Pymongo
 mongoengine
 passlib
