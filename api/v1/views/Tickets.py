@@ -1,4 +1,6 @@
 """ Module containing all RESTful api actions for Tickets """
+from pprint import pprint
+from flask.app import Flask
 from flask.helpers import url_for
 from mongoengine.errors import DoesNotExist, FieldDoesNotExist, ValidationError
 from flasgger import swag_from
@@ -18,11 +20,28 @@ def whoami():
         return redirect(url_for('app_views.login'))
     return hi
 
-@app_views.route('/tickets', methods=['GET'], strict_slashes=False)
-@swag_from('apidoc/all_tickets.yml')
 def all_tickets():
     """ Returns all tickets """ 
     return Tickets.objects.to_json()
+
+@app_views.route('/ticketsfull', methods=['GET'], strict_slashes=False)
+@swag_from('apidoc/ticketsfull.yml')
+def tickets_full():
+    """ returns all tickets with objs inserted """
+    list = []
+    tickets_json = Tickets.objects.to_json()
+    tickets = json.loads(tickets_json)
+    for ticket in tickets:
+        try:
+            ticket['client_id'] = Client.objects.get(id=str(ticket['client_id']['$oid'])).to_json()
+            ticket['created_by'] = User.objects.get(id=str(ticket['created_by']['$oid'])).to_json()
+        except DoesNotExist:
+            abort(404, " Client or user id does not exist ")
+        except KeyError:
+            abort(404, "ticket does not contain a required key")
+    print(type(tickets[0]))
+    pprint(tickets)
+    return tickets_json
 
 
 @app_views.route('/tickets/<tstatus>', methods=['GET'], strict_slashes=False)
