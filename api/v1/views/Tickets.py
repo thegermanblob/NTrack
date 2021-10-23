@@ -40,9 +40,14 @@ def tickets_full():
         except DoesNotExist:
             abort(404, " Client or user id does not exist ")
         except KeyError:
-            abort(404, "ticket does not contain a required key")
-    print(type(tickets[0]))
-    pprint(tickets)
+            pass
+        for status in ticket['status_updates']:
+            try:
+                status['created_by'] = User.objects.get(id=str(ticket['created_by']['$oid'])).to_json()
+            except DoesNotExist:
+                abort(404, " Client or user id does not exist ")
+            except KeyError:
+                pass
     return tickets_json
 
 
