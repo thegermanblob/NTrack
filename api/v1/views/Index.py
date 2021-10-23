@@ -4,9 +4,11 @@ from flask import jsonify, Blueprint
 from models.Client import Client
 from models.Tickets import Tickets
 from models.User import User
+from models.mongo_setup import global_init
 
 app_views = Blueprint('app_views', __name__, url_prefix='/api/v1')
 
+global_init()
 @app_views.route('/status', methods=['GET'], strict_slashes=False)
 @swag_from('apidoc/status.yml')
 def status():
