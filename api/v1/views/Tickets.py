@@ -20,6 +20,8 @@ def whoami():
         return redirect(url_for('app_views.login'))
     return hi
 
+@app_views.route('/tickets', methods=['GET'], strict_slashes=False)
+@swag_from('apidoc/all_tickets.yml')
 def all_tickets():
     """ Returns all tickets """ 
     return Tickets.objects.to_json()
