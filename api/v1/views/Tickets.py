@@ -48,7 +48,7 @@ def tickets_full():
                 abort(404, " Client or user id does not exist ")
             except KeyError:
                 pass
-    return jsonify(tickets)
+    return json.dumps(tickets)
 
 
 @app_views.route('/tickets/<tstatus>', methods=['GET'], strict_slashes=False)
