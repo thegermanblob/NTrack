@@ -1,7 +1,7 @@
 """ Module containing all RESTful api actions for Tickets """
 from pprint import pprint
 from flask.app import Flask
-from flask.helpers import url_for
+from flask.helpers import make_response, url_for
 from mongoengine.errors import DoesNotExist, FieldDoesNotExist, ValidationError
 from flasgger import swag_from
 from flask import json, request, abort, session, Blueprint, redirect, jsonify
@@ -30,6 +30,7 @@ def all_tickets():
 @swag_from('apidoc/ticketsfull.yml')
 def tickets_full():
     """ returns all tickets with objs inserted """
+
     list = []
     tickets_json = Tickets.objects.to_json()
     tickets = json.loads(tickets_json)
@@ -48,7 +49,9 @@ def tickets_full():
                 abort(404, " Client or user id does not exist ")
             except KeyError:
                 pass
-    return json.dumps(tickets)
+    resp = make_response()
+    resp.set_cookie('customcook', 'hello')
+    return resp
 
 
 @app_views.route('/tickets/<tstatus>', methods=['GET'], strict_slashes=False)
