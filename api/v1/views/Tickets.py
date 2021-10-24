@@ -35,8 +35,8 @@ def tickets_full():
     tickets = json.loads(tickets_json)
     for ticket in tickets:
         try:
-            ticket['client_id'] = Client.objects.get(id=str(ticket['client_id']['$oid'])).to_json()
-            ticket['created_by'] = User.objects.get(id=str(ticket['created_by']['$oid'])).to_json()
+            ticket['client_id'] = Client.objects.get(id=str(ticket['client_id']['$oid'])).to_json().replace("\"", "'")
+            ticket['created_by'] = User.objects.get(id=str(ticket['created_by']['$oid'])).to_json().replace("\"", "'")
         except DoesNotExist:
             abort(404, " Client or user id does not exist ")
         except KeyError:
