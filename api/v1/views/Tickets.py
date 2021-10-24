@@ -45,13 +45,12 @@ def tickets_full():
         for status in ticket['status_updates']:
             try:
                 status['created_by'] = json.loads(User.objects.get(id=str(ticket['created_by']['$oid'])).to_json())
+
             except DoesNotExist:
                 abort(404, " Client or user id does not exist ")
             except KeyError:
                 pass
-    resp = make_response()
-    resp.set_cookie('customcook', 'hello')
-    return resp
+    return tickets
 
 
 @app_views.route('/tickets/<tstatus>', methods=['GET'], strict_slashes=False)
