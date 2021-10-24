@@ -4,7 +4,7 @@ from flask.app import Flask
 from flask.helpers import url_for
 from mongoengine.errors import DoesNotExist, FieldDoesNotExist, ValidationError
 from flasgger import swag_from
-from flask import json, request, abort, session, Blueprint, redirect
+from flask import json, request, abort, session, Blueprint, redirect, jsonify
 from models.Client import Client
 from models.Tickets import Tickets
 from models.User import User
@@ -48,7 +48,7 @@ def tickets_full():
                 abort(404, " Client or user id does not exist ")
             except KeyError:
                 pass
-    return tickets_json
+    return jsonify(tickets)
 
 
 @app_views.route('/tickets/<tstatus>', methods=['GET'], strict_slashes=False)
