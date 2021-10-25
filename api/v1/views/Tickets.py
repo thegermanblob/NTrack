@@ -131,14 +131,18 @@ def st_updates(original, up_dict):
     quickpop(up_dict)
     og_keys = og_dict.keys()
     up_keys = up_dict.keys()
-    descrip = up_dict.pop('comment', "")
+    descrip = up_dict.pop('comment', None)
         
     
 
     #prepares description for status update
     up_dict.pop('_id', None)
     for key, val in up_dict.items():
-        descrip = descrip + "\n Changed {} : {}".format(key ,val)
+        if descrip:
+            descrip = descrip + "\nChanged {} : {}".format(key ,val)
+        else:
+            descrip = "Changed {} : {}".format(key ,val)
+
     stat = {}
     stat['created_by'] = User.objects.get(id="616f4c9ff66c2a496d7e5bd3")
     stat['comment'] = descrip
