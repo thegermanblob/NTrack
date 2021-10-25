@@ -30,8 +30,6 @@ def all_tickets():
 @swag_from('apidoc/ticketsfull.yml')
 def tickets_full():
     """ returns all tickets with objs inserted """
-
-    list = []
     tickets_json = Tickets.objects.to_json()
     tickets = json.loads(tickets_json)
     for ticket in tickets:
@@ -58,7 +56,6 @@ def ticket_full(ticket_id):
     """ Returns ticket with ful information """
     try:
         ticket = json.loads(Tickets.objects.get(id=ticket_id).to_json())
-
     except DoesNotExist:
         abort(404, "Invalid ticket id")
     try:
@@ -70,8 +67,8 @@ def ticket_full(ticket_id):
         pass
     for status in ticket['status_updates']:
         try:
-            status['created_by'] = json.loads(User.objects.get(id=str(ticket['created_by']['$oid'])).to_json())
-
+            user = json.loads(User.objects.get(id=str(ticket['created_by']['_id']['$oid'])).to_json())
+            status['created_by'] = user 
         except DoesNotExist:
             abort(404, " Client or user id does not exist ")
         except KeyError:
@@ -132,18 +129,21 @@ def st_updates(original, up_dict):
     og_keys = og_dict.keys()
     up_keys = up_dict.keys()
     descrip = up_dict.pop('comment', None)
+    status_up_stat = up_dict.pop('status', None)
         
     
 
     #prepares description for status update
-    up_dict.pop('_id', None)
-    for key, val in up_dict.items():
-        if descrip:
-            descrip = descrip + "\nChanged {} : {}".format(key ,val)
-        else:
-            descrip = "Changed {} : {}".format(key ,val)
+    #up_dict.pop('_id', None)
+    #for key, val in up_dict.items():
+    #    if descrip:
+    #        descrip = descrip + "\nChanged {} : {}".format(key ,val)
+    #    else:
+    #        descrip = "Changed {} : {}".format(key ,val)
 
     stat = {}
+    if status_up_stat:
+        stat['status_change'] = status_up_stat
     stat['created_by'] = User.objects.get(id="616f4c9ff66c2a496d7e5bd3")
     stat['comment'] = descrip
     try:
