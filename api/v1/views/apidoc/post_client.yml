@@ -1,0 +1,46 @@
+Endpoint to create a new Client
+---
+parameters:
+  - name: client
+    in: content
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+            last_name:
+              type: string
+            created_at:
+              type: string
+            email:
+              type: string
+            phone:
+              type: string
+            created_by:
+              type: string
+responses:
+  200:
+    description: Success
+    schema:
+          type: object
+          properties:
+            name:
+              type: string
+              description: client name
+            last_name:
+              type: string
+              description: client last name
+            created_at:
+              type: string
+              description: time and date the client profile was created
+            email:
+              type: string
+              description: clients email
+            phone:
+              type: string
+              description: Clients phone
+            created_by:
+              type: string
+              description: user that created client profile

@@ -1,0 +1,18 @@
+Endpoint to login
+---
+parameters:
+  - in: content
+    content:
+      schema:
+        type: object
+        email:
+          type: string
+          required: true
+        password:
+          type: string
+          required: true
+
+      
+responses:
+  200:
+    description: Success

@@ -1,0 +1,36 @@
+Endpoint provides ticket from the db with client and user objects attached
+---
+parameter:
+  - name: ticket_id
+    type: string
+    required: true
+    
+responses:
+  200:
+    description: A list of all tickets in the database
+    examples:
+      result:
+        - _id:
+          $oid: 6164918c6d73e9652de41cc7
+          status: open
+          status_updates: []
+          client_id:
+            - _id:
+                "$oid": 616f4c9ff66c2a496d7e5bd3
+              name: bob
+              last_name: El constructor
+              email: bobsconstructioin@emaiasl.com
+              created_at:
+                "$date": 1634778650601
+              updated_at:
+                "$date": 1634778650601
+              client_id:
+                - _id:
+                    "$oid": 616f4c9ff66c2a496d7e5bd3
+                  name: bob
+                  last_name: El constructor
+                  email: bobsconstructioin@emaiasl.com
+                  created_at:
+                    "$date": 1634778650601
+                  updated_at:
+                    "$date": 1634778650601

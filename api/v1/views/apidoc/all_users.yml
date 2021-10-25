@@ -1,0 +1,33 @@
+Endpoint providing list of all Users in the database
+---
+responses:
+  200:
+    description: A list containing all Users
+    examples:
+        - _id:
+            "$oid": 6170be1ace938dab7b685232
+          name: bob
+          last_name: El constructor
+          email: bobsconstruction@emaiasl.com
+          created_at:
+            "$date": 1634778650601
+          updated_at:
+            "$date": 1634778650601
+        - _id:
+            "$oid": 616483c079e32de906afab6a
+          name: barney
+          last_name: eldino
+          email: eldinopurpura@email.com
+          created_at:
+            "$date": 1634875200000
+          updated_at:
+            "$date": 1634875200000
+        - _id:
+            "$oid": 616f4c9ff66c2a496d7e5bd3
+          name: bob
+          last_name: El constructor
+          email: bobsconstructioin@emaiasl.com
+          created_at:
+            "$date": 1634778650601
+          updated_at:
+            "$date": 1634778650601

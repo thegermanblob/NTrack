@@ -1,4 +1,4 @@
-Endpoint to update a ticket
+Endpoint to create a new ticket
 ---
 parameters:
   - name: ticket
@@ -21,9 +21,9 @@ parameters:
     required: true
 
 responses:
-  200:
-    description: The updated json object
-    examples: 
+    200:
+      description: The created json object
+      examples: 
         - _id:
             "$oid": 616f4c9ff66c2a496d7e5bd3
           name: bob

@@ -2,9 +2,15 @@ Endpoint to get ticket by its ticket_id
 ---
 parameters:
   - name: ticket_id
+    in: path
     type: string
     required: true
 
 responses:
   200:
     description: The ticket corresponding to the given ticket_id
+    example:
+      - _id:
+        $oid: 616492475107c031b4abb9e5
+        status: open
+        status_updates: []
