@@ -131,28 +131,17 @@ def st_updates(original, up_dict):
     quickpop(up_dict)
     og_keys = og_dict.keys()
     up_keys = up_dict.keys()
+    descrip = up_dict.pop('comment', "")
         
-    # Verify what atributes we are adding or removing
-    if len(og_dict) < len(up_keys):
-        key_diff1 = up_keys - og_keys
-    elif len(og_dict) > len(up_keys):
-        key_diff = og_keys - up_keys
     
-    if key_diff: 
-        descrip = "Removed following info: "
-        for key in key_diff:
-            if key != "_id":
-                descrip = descrip + "{}".format(key)
-    elif key_diff1:
-        descrip = "Added following info: {}".format(key_diff1)
 
     #prepares description for status update
     up_dict.pop('_id', None)
     for key, val in up_dict.items():
         descrip = descrip + "\n Changed {} : {}".format(key ,val)
     stat = {}
-    stat['created_by'] = User.objects.get(email=session['email'])
-    stat['description'] = descrip
+    stat['created_by'] = User.objects.get(id="616f4c9ff66c2a496d7e5bd3")
+    stat['comment'] = descrip
     try:
         original.status = up_dict['status']
     except KeyError:
