@@ -7,13 +7,13 @@ from models.User import User
 from api.v1.views.Index import app_views
 
 @app_views.route('/users', methods=['GET'], strict_slashes=False)
-@swag_from('apidocs/all_users.yml')
+@swag_from('apidoc/all_users.yml')
 def all_users():
     """ Returns all users """
     return User.objects.to_json()
 
 @app_views.route('/users/<user_id>', methods=['GET'], strict_slashes=False)
-@swag_from('apidocs/get_user.yml')
+@swag_from('apidoc/get_user.yml')
 def get_user(user_id):
     """ Gets user with given user id """
     try:
@@ -25,7 +25,7 @@ def get_user(user_id):
 
 
 @app_views.route('/users/', methods=['POST'], strict_slashes=False)
-@swag_from('apidocs/post_user.yml')
+@swag_from('apidoc/post_user.yml')
 def post_user():
     """ Takes a user json object and adds it to the database"""
     new = request.get_json()

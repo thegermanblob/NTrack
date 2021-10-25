@@ -25,7 +25,7 @@ def get_client(client_id):
         abort(404, description="Invalid Id")
 
 @app_views.route('/clients/', methods=['POST'], strict_slashes=False)
-@swag_from('apidocs/post_client.yml')
+@swag_from('apidoc/post_client.yml')
 def post_client():
     """ Takes a client json and adds it to the Database """
     new = request.get_json()

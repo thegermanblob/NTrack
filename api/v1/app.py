@@ -6,11 +6,11 @@ from models.mongo_setup import global_init
 from flask_cors import CORS
 
 app = Flask(__name__)
+swagger = Swagger(app)
 app.secret_key = 'BAD_SECRET_KEY'
 app.register_blueprint(app_views)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
-Swagger(app)
 
 if __name__ == "__main__":
     """ Main function """
