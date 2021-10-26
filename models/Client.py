@@ -7,7 +7,7 @@ class Client(Document):
     name = StringField(max_length=15, required=True)
     last_name = StringField(max_length=20, required=True)
     email = StringField(max_length=50, unique=True)
-    phone_num = StringField(max_length=11)
+    phone = StringField(max_length=11)
     address = StringField(max_length=100)
     created_at = DateTimeField(default=datetime.utcnow)
     updated_at = DateTimeField(default=datetime.utcnow)

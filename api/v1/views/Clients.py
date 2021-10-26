@@ -54,6 +54,7 @@ def put_client(client_id):
     if not updated:
         abort(404, description="Given object not a valid json")
 
+    updated.pop('_id', None)
     original.update(**updated)
     original = Client.objects.get(id=client_id)
     return original.to_json()
