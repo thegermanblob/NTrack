@@ -17,7 +17,7 @@ def all_users():
 def get_user(user_id):
     """ Gets user with given user id """
     try:
-        return User.objects.get(id=user_id)
+        return User.objects.get(id=user_id).to_json()
     except DoesNotExist:
         abort(404, description="Given user id does not exists")
     except ValidationError:
