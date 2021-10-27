@@ -8,5 +8,5 @@ class StatusUpdates(EmbeddedDocument):
     """ Class that represents a status update """
     created_by = ReferenceField(User, required=True)
     status_change = StringField()
-    comment = StringField(max_length=400, requiered=True)
+    comment = StringField(max_length=400)
     created = DateField(default=datetime.utcnow())
