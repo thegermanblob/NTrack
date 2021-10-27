@@ -88,11 +88,11 @@ def post_ticket():
     new = request.get_json()
     if not new:
         abort(404, description="Not a JSON")
-    if not session.pop('email', None):
-        return redirect(url_for('app_views.login'))
+    if new['user_id'] is None:
+        abort(400, description="User id must be included")
 
     new.pop('_id', None)
-    new['created_by'] = User.objects.get(email=session.pop('email', None))
+    new['created_by'] = User.objects.get(id=new.pop('user_id', None))
     new = Tickets(**new)
     new.save()
     return (new.to_json())
@@ -144,13 +144,15 @@ def st_updates(original, up_dict):
     stat = {}
     if status_up_stat:
         stat['status_change'] = status_up_stat
+        #if status_up_stat == 'closed':
+            #send email
     stat['created_by'] = User.objects.get(id="616f4c9ff66c2a496d7e5bd3")
     stat['comment'] = descrip
     try:
         original.status = up_dict['status']
     except KeyError:
         pass
-
+    
     original.status_updates.append(StatusUpdates(**stat))
     original.save()  
 
