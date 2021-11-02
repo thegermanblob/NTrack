@@ -31,6 +31,7 @@ def all_tickets():
 def tickets_full():
     """ returns all tickets with objs inserted """
     tickets_json = Tickets.objects.to_json()
+    pprint(tickets_json)
     tickets = json.loads(tickets_json)
     for ticket in tickets:
         try:

@@ -1,6 +1,6 @@
 from datetime import date, datetime
 import mongoengine
-from mongoengine.fields import DateTimeField
+from mongoengine.fields import DateTimeField, StringField
 from models.Client import Client
 from models.User import User
 from models.StatusUpdate import StatusUpdates
@@ -15,8 +15,8 @@ class Tickets(mon.Document):
     description = mon.StringField(max_length=300)
     created_by =  mon.ReferenceField(User)
     status_updates = mon.EmbeddedDocumentListField(StatusUpdates)
-    created_at = DateTimeField(default=datetime.utcnow)
-    updated_at = DateTimeField(default=datetime.utcnow)
+    created_at = StringField(default=datetime.utcnow().strftime('%B %d %Y - %H:%M:%S'))
+    updated_at = StringField(default=datetime.utcnow().strftime('%B %d %Y - %H:%M:%S'))
 
     meta = {
         'collection':"Tickets"
