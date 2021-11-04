@@ -9,4 +9,4 @@ class StatusUpdates(EmbeddedDocument):
     created_by = ReferenceField(User, required=True)
     status_change = StringField()
     comment = StringField(max_length=400)
-    created = StringField(default=datetime.utcnow().strptime().strftime('%B %d %Y - %H:%M:%S'))
+    created = StringField(default=datetime.utcnow().strftime('%B %d %Y - %H:%M:%S'))

@@ -1,0 +1,27 @@
+or import maska directive for local usage in component:
+
+<template>
+    <form>
+        <input v-maska="'(###) ###-####'">
+    </form>
+</template>
+
+<script>
+import { maska } from 'maska'
+
+export default {
+    directives: { maska }
+}
+</script>
+
+Default tokens:
+
+{
+    '#': { pattern: /[0-9]/ },
+    'X': { pattern: /[0-9a-zA-Z]/ },
+    'S': { pattern: /[a-zA-Z]/ },
+    'A': { pattern: /[a-zA-Z]/, uppercase: true },
+    'a': { pattern: /[a-zA-Z]/, lowercase: true },
+    '!': { escape: true },
+    '*': { repeat: true }
+}

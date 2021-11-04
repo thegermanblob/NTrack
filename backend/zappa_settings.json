@@ -1,0 +1,10 @@
+{
+    "dev": {
+        "app_function": "api.v1.app.app",
+        "profile_name": "default",
+        "project_name": "ntrack",
+        "runtime": "python3.8",
+        "s3_bucket": "zappa-d0nqgdx1g",
+		"aws_region": "us-east-2"
+    }
+}

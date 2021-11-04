@@ -4,7 +4,10 @@ from flask import request, abort, session, redirect
 from flask.helpers import url_for
 from mongoengine.errors import DoesNotExist, ValidationError
 from models.User import User
+import json
+from pprint import pprint
 from api.v1.views.Index import app_views
+from models.sessions import msessions
 
 @app_views.route('/login', methods=['GET', 'POST'])
 @swag_from('apidoc/login.yml')
@@ -23,8 +26,17 @@ def login():
 
         if info['password'] == user.password:
             session['email'] = user.email
+            bob = {}
+            bob['string']= (str(session.__dict__))
+            msessions(bob)
+
+            
             return "Login success"
         else:
             return "Incorrect password"
     else:
+        try:
+            session['email'] = "hi"
+        except:
+            return "login page"
         return "login page"

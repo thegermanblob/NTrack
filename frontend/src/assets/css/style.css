@@ -1,0 +1,270 @@
+body{
+    background-image: url('../images/bg.jpg');
+    background-color: #333;
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    background-position:center;
+    background-size: cover;
+    
+}
+
+
+.navbar-brand > .brandname
+{
+    font-family: 'Nova Round', cursive;
+    font-size: 34px !important;
+    text-shadow: 1px 1px #333;
+    display: block;
+    margin-bottom: -6px !important;
+    padding: 0 !important;
+    letter-spacing: -3px !important;
+
+}
+
+.navbar-brand > .tagline
+{
+    font-size:12px;
+    text-shadow: 1px 1px #666;
+    margin: 0 !important;
+}
+
+#navbarSupportedContent
+{
+    margin-left: 50px !important;
+}
+
+.clearwhite
+{
+    background-color: rgba(255,255,255,0.1) !important;
+}
+
+.mymodal
+{
+    background-color: rgba(255,255,255,.9) !important;
+}
+
+.clearblack
+{
+    background-color: rgba(0,0,0,0.4) !important;
+}
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+
+.newticket
+{
+   color:#fff !important; 
+   border:1.3px solid #fff !important; 
+}
+
+.newticket:hover
+{
+    background-color: rgb(250, 187, 13) !important;
+    color:#000 !important;
+}
+
+.textwhite
+{
+    color:#fff !important;
+}
+
+.loggedUser
+{
+    
+    margin:auto 20px;
+    margin-bottom: 20px;
+}
+
+.loggedUser #loggedUser
+{
+    font-size:18px;
+    margin:0 !important;
+}
+
+.loggedUser #loggedEmail
+{
+    color:#999;
+    font-size:12px;
+}
+
+
+.loggedUser .dropdown-item
+{
+    font-size:12px !important;
+}
+
+.loggedUser .userInfo
+{
+    padding: 0 20px !important;
+    margin:0 !important;
+}
+
+.form-group, .row
+{
+    margin-bottom: 20px !important;
+}
+
+.form-group p{
+    padding:10px;
+}
+
+.control-label
+{
+    margin-bottom: 10px !important;
+    color: #fff;
+    text-shadow: 1px 1px #333;
+}
+
+fieldset
+{
+    border: 0 !important;
+    margin: 40px auto 40px !important;
+    background:rgba(0, 0, 0, .7);
+    padding: 10px 40px 10px !important;
+}
+
+fieldset > legend
+{
+    padding:20px !important;
+    font-size:26px;
+    text-shadow: 1px 1px #333;
+
+    color:#fff;
+    letter-spacing: -1px !important;
+    text-align: center !important;
+}
+
+.myform h3
+{
+    color:#fff;
+    text-shadow: 1px 1px #333;
+    font-size: 22px !important;
+    letter-spacing: -.5px !important;
+    margin-bottom:30px;
+    padding:20px;
+}
+
+.myform h3 i
+{
+    margin-right: 10px;
+}
+
+a.openPopup
+{
+    margin-bottom:40px !important;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0 !important;
+    color: rgb(250, 187, 13) !important;
+    text-align: right;
+}
+
+a.openPopup:hover
+{
+    color: rgb(255, 216, 109) !important;
+    cursor:pointer;
+}
+
+a.openPopup i
+{
+    margin-right: 10px;
+}
+
+.tableheading
+{
+    background-color: #a0670ccc !important;
+    font-weight: bold;
+    color:white;
+}
+
+.table-striped tr:nth-child(even)
+{
+    background-color:rgba(255,255,255,0.5);
+}
+
+.table-striped tr:hover{
+    
+    font-weight: bold;
+}
+
+.mybtn
+{
+    font-weight: bold !important;
+    padding:20px !important;
+}
+
+.btn-light
+{
+    border:0 !important;
+}
+
+.form-select option
+{
+    margin-bottom:10px !important;
+    padding-bottom:10px !important;
+}
+
+.alert
+{
+    margin-bottom:40px !important;
+}
+
+
+.divider
+{
+    border-bottom:1px dotted #666;
+    margin:30px auto;
+}
+
+.mytable
+{
+    color:#fff !important;
+    margin-bottom: 30px !important;
+}
+
+.mytable th 
+  {
+    padding:20px 0 20px 10px;
+  }
+
+table tr
+{
+    border:0 !important;
+}
+
+.mytable td
+{
+    vertical-align: top !important;
+    padding:10px;
+}
+
+.mytable tr
+{
+    border-bottom: .5px #666 solid !important;
+}
+
+.mytable tr:last-child
+{
+    border-style: none !important;
+}
+
+.loading {
+
+    text-align: center;
+    margin: auto;
+
+  }
+  
