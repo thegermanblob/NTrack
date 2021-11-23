@@ -1,5 +1,5 @@
 <template>
-    <div class="container" style='margin-top:3%'>
+    <div class="container">
         <!--<button @click="getPosts">Load posts</button>-->
         <div v-if="errorMsg" class="alert alert-danger fade show" role="alert">
               <strong>{{ errorMsg}}</strong>

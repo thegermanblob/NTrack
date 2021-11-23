@@ -2,31 +2,27 @@
 <div id="showTicket" class="container">
 
     <fieldset class="myform" style="margin:auto;">
-           
+            <legend><span>Client details for <strong>{{ this.fullname }}</strong></span></legend>
+            <div class="divider"></div>
             
-      
-
-      <!----------------------- GENERAL DETAILS --------------------------------------->          
-
-        <form @submit.prevent="checkForm">                        
-          <h3 class="clearwhite"><i class="fas fa-user-plus"></i> Register a new client</h3>
-
-          <!--------- ALERTS SECTION START ------------------------------------------------> 
+              <!-- ALERTS SECTION START ------------------------------------------>
+            
             <div v-if="errors.length" class="alert alert-danger fade show" role="alert">
               <strong>Please correct the following error(s):</strong>              
                 <ul>
-                  <li v-for="error in errors" :key="error.index">{{ error }}</li>
+                <li v-for="error in errors" :key="error.index">{{ error }}</li>
                 </ul>
             </div>
             <div v-if="successMsg" class="alert alert-success alert-dismissible fade show" role="alert">
               {{ this.successMsg }}
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-            <div v-if="errorMsg" class="alert alert-danger alert-dismissible fade show" role="alert">
-              {{ this.errorMsg }}
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            
+
+              <!----------------------- GENERAL DETAILS --------------------------------------->
+          <!--<p class="control-label">{{ formData }}</p> -->
+
+        <form @submit.prevent="checkForm">                        
+          <h3 class="clearwhite"><i class="fas fa-info-circle"></i> Modify general client details</h3>
             <div class="row">
                 <div class="col-md-6">                  
                   <div class="form-group">
@@ -61,7 +57,7 @@
             <div class="row">
                   <div class="form-group">
                       <button class="btn btn-primary btn-outline-success newticket me-2 clearwhite" role="button">
-                        <i class="fas fa-user-check"></i> OK
+                        <i class="fas fa-user-check"></i> Update details
                       </button> 
                       <router-link :to="{ name: 'clientList' }" class="btn btn-primary btn-outline-success newticket me-2 clearwhite">
                         <i class="far fa-arrow-alt-circle-left"></i> Go back
@@ -81,13 +77,16 @@
 
   export default {
     
-    name: 'newClient',
+    props: ['clientID'],
     directives: { maska },
     data() {
         return {
           client: [],
           errors: [],
           formData: {
+                _id: {
+                  $oid: this.clientID
+                },
                 client_name: '',
                 client_last_name: '',
                 client_phone: '',
@@ -99,42 +98,65 @@
         }
     },   
     created() {
-        
+        this.loadClient(this.clientID)
     },
     methods: {
         checkForm: function() {
+
+                if (this.formData.client_name && this.formData.client_last_name && this.formData.client_phone && this.formData.client_email) {
+                    
+                    console.log('Form passed');
+                    this.updateClient(this.clientID);           
+                }
                 this.successMsg = '';
                 this.errors = [];
 
-                if (this.formData.client_name && this.formData.client_last_name && 
-                    this.formData.client_phone && this.formData.client_email) {                    
-                    console.log(this.formData);
-                    this.addClient();
-                }
-                
                 if (!this.formData.client_name) {
+                    console.log('Form didnt pass');
                     this.errors.push('First name is required');
                 }
-                if (!this.formData.client_last_name) {                    
+                if (!this.formData.client_last_name) {
+                    console.log('Form didnt pass');
                     this.errors.push('Last name is required');
                 }
-                if (!this.formData.client_phone) {                    
+                if (!this.formData.client_phone) {
+                    console.log('Form didnt pass');
                     this.errors.push('Phone number is required');
                 }
                 if (!this.formData.client_email) {
+                    console.log('Form didnt pass');
                     this.errors.push('A valid email address is required');
                 }
         },
-        addClient() {                   
-                  axios.post('https://2ktpylu8p5.execute-api.us-east-2.amazonaws.com/dev/api/v1/clients/', this.formData)
-                  .then((response) => {                                            
-                      console.log(response),                         
-                         this.successMsg = 'New client registered successfuly';
+        updateClient(id) {          
+                 axios.put('https://2ktpylu8p5.execute-api.us-east-2.amazonaws.com/dev/api/v1/clients/' + id, this.formData)
+                 .then(
+                     response => {
+                         console.log('Saving record #' + id + '...');
+                         console.log(response);
+                         console.log(this.formData);
+                         this.successMsg = 'Client details updated successfuly';
+                         this.errors = [];
+                         this.loadClient(id);
                          return;
+                     })
+                 .catch(
+                     error => {
+                         console.log(error),
+                         this.errorMsg = 'Error saving client details'
+                     })
+        },
+        loadClient(id) {                   
+                  axios.get('https://2ktpylu8p5.execute-api.us-east-2.amazonaws.com/dev/api/v1/client/' + id)
+                  .then((response) => {
+                      console.log('Loading record #' + id + '...');
+                      console.log(response.data);
+                      this.client = response.data;
+                      this.fullname = this.client.client_name + ' ' + this.client.client_last_name;
                   })
                   .catch((error) => {
                       console.log(error),
-                      this.errorMsg = 'There was an error adding this client. Try again!'
+                      this.errorMsg = 'There was an error loading client list. Try again!'
                   })
             }
     },

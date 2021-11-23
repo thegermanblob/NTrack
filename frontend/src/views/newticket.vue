@@ -97,11 +97,8 @@
 
   export default {
     name: 'newTicket',
-    created() {
-        //this.loadClients()
-    },
     data() {
-        return {          
+        return {
             errors: [],
             clients: [],
             errorMsg: '',
@@ -119,8 +116,7 @@
         checkForm: function() {
 
                 if (this.formData.description && this.formData.client_id && this.formData.device) {
-                    this.addTicket();
-                    console.log('form passed'); 
+                    this.addTicket();                    
                     console.log(this.formData);   
                 }
                 this.successMsg = '';
@@ -154,18 +150,7 @@
                          console.log(error),
                          this.errorMsg = 'Error adding new ticket'
                      })
-            },/*
-            loadClients() {                   
-                  axios.get('https://2ktpylu8p5.execute-api.us-east-2.amazonaws.com/dev/api/v1/clients')
-                  .then((response) => {
-                      console.log(response.data);
-                      this.clients = response.data;
-                  })
-                  .catch((error) => {
-                      console.log(error),
-                      this.errorMsg = 'There was an error loading client list. Try again!'
-                  })
-            }*/
+            }
     }        
   }
   

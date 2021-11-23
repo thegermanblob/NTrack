@@ -2,64 +2,44 @@
 <div id="showTicket" class="container">
 
     <fieldset class="myform" style="margin:auto;">
-            <legend><span>User details ({{ this.fullname }})</span></legend>
-            <div class="divider"></div>
             
-              <!-- ALERTS SECTION START ------------------------------------------>
+        <!----------------------- GENERAL DETAILS --------------------------------------->
+                       
+          <h3 class="clearwhite"><i class="fas fa-info-circle"></i> User details</h3>
+            
+            <!-- ALERTS SECTION START ------------------------------------------>
             
             <div v-if="errorMsg" class="alert alert-danger alert-dismissible fade show" role="alert">
               {{ errorMsg }}
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-            <div v-if="successMsg" class="alert alert-success alert-dismissible fade show" role="alert">
-              {{ successMsg }}
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
 
-
-              <!----------------------- GENERAL DETAILS --------------------------------------->
-
-        <form>                            
-          <h3 class="clearwhite"><i class="fas fa-info-circle"></i> Modify general details</h3>
             <div class="row">
                 <div class="col-md-6">                  
                   <div class="form-group">
-                    <p class="control-label clearblack"><strong>First name:</strong> {{ user.name }}</p>      
-                                  
-                    <input type="text" id="userName" class="form-control" placeholder="Enter a new value to be changed">
+                    <p class="control-label clearblack"><strong>Name:</strong> {{ user.name }}</p>                    
                   </div>
                 </div>
                 <div class="col-md-6">                  
                   <div class="form-group">
-                    <p class="control-label clearblack"><strong>Last name:</strong> {{ user.last_name }}</p>                    
-                    <input type="text" id="last_name" class="form-control" placeholder = 'Enter a new value to be changed'>
+                    <p class="control-label clearblack"><strong>Address:</strong> {{ user.address.street + ', ' + user.address.suite + ' ' + user.address.city }}</p>
                   </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                   <div class="form-group">
-                    <p class="control-label clearblack"><strong>User phone number:</strong> {{ user.phone }}</p>
-                    <input type="text" id="phone" class="form-control" placeholder = 'Enter a new value to be changed'>
+                    <p class="control-label clearblack"><strong>User phone number:</strong> {{ user.phone }}</p>                    
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <p class="control-label clearblack"><strong>Email address:</strong> {{ user.email }}</p>                    
                   </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <p class="control-label clearblack"><strong>Email address:</strong> {{ user.email }}</p>
-                    <input type="text" id="email" class="form-control" placeholder = 'Enter a new value to be changed'>                                     
-                  </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <button class="btn btn-primary"><i class="fas fa-user-check"></i> Update details</button>
-                  </div>
-                </div>
-            </div>
-          </form>
+           
+        
       
       </fieldset>
 
@@ -68,23 +48,21 @@
 <script>
   import axios from 'axios';
   export default {
-    props: ['userID'],
-    methods: {},
+    props: ['userID'],    
     data() {
         return {
-          user: [],
-          fullname: '',
+          user: [],          
           errorMsg: '',
           successMsg: ''
         }
     },
     
-    created() {        
-        axios.get('https://2ktpylu8p5.execute-api.us-east-2.amazonaws.com/dev/api/v1/users/' + this.userID)
+    created() {     
+        console.log('Fetching details for id '+ this.userID +'...');
+        axios.get('https://jsonplaceholder.typicode.com/users/' + this.userID)
         .then((response) => {
             console.log(response.data);
-            this.user = response.data;
-            this.fullname = this.user.name + ' ' + this.user.last_name;
+            this.user = response.data;            
         })
         .catch((error) => {
             console.log(error),
